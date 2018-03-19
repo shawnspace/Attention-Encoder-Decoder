@@ -9,14 +9,6 @@ from tensorflow.python import debug as tf_debug
 import evaluate
 import datetime
 
-# add momentum
-#dropout cell
-#bi-directional
-#gradient clipping
-#beam search in generation
-# truncated BPTT
-# penalize unk words
-
 def main(unused_arg):
     tf.logging.set_verbosity(tf.logging.INFO)
     train()
