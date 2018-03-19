@@ -35,10 +35,7 @@ def evaluate(eval_file,model_dir,summary_dir,train_steps):
 
         cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(labels=response_out, logits=logits)
         ppl = tf.reduce_mean(tf.multiply(cross_entropy, tf.to_float(response_mask)))
-
-        # wrong_predictions = tf.not_equal(tf.to_int64(sample_ids),tf.to_int64(response_out))
-        # wrong_predictions = tf.multiply(tf.to_float(response_mask),tf.cast(wrong_predictions, tf.float32))
-        # WER = tf.reduce_sum(tf.cast(wrong_predictions, tf.float32))
+        ppl = tf.exp(ppl)
         WER,wer_update_op = tf.metrics.accuracy(labels=response_out,predictions=sample_ids,weights=response_mask)
 
         sess = tf.Session()
